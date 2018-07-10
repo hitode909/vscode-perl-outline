@@ -1,7 +1,7 @@
 {
     "name": "perl-outline",
     "displayName": "perl-outline",
-    "description": "",
+    "description": "A sketch to provide outlinse view of perl source code",
     "version": "0.0.1",
     "publisher": "hitode909",
     "engines": {
@@ -11,16 +11,10 @@
         "Other"
     ],
     "activationEvents": [
-        "onCommand:extension.sayHello"
+        "onLanguage:perl"
     ],
     "main": "./out/extension",
     "contributes": {
-        "commands": [
-            {
-                "command": "extension.sayHello",
-                "title": "Hello World"
-            }
-        ]
     },
     "scripts": {
         "vscode:prepublish": "npm run compile",
