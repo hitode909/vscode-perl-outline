@@ -1,7 +1,7 @@
 {
     "name": "perl-outline",
     "displayName": "perl-outline",
-    "description": "A sketch to provide outlinse view of perl source code",
+    "description": "WIP: Provide outline view for Perl",
     "version": "0.0.1",
     "publisher": "hitode909",
     "engines": {
