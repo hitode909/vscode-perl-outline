@@ -5,7 +5,11 @@ import { PerlDocumentSymbolProvider } from './documentSymbolProvider';
 export function activate(context: vscode.ExtensionContext) {
 	context.subscriptions.push(
 		vscode.languages.registerDocumentSymbolProvider(
-            { language: 'perl', scheme: 'file' }, new PerlDocumentSymbolProvider()
+			[
+				{ language: 'perl', pattern: '**/*.{pm,pl,t}' },
+				{ language: 'perl', scheme: 'untitled' },
+			],
+			new PerlDocumentSymbolProvider()
 		)
 	);
 }
