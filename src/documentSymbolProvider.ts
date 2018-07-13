@@ -49,7 +49,6 @@ export class PerlDocumentSymbolProvider implements vscode.DocumentSymbolProvider
         pattern.lastIndex = 0;
         let match: RegExpMatchArray | null;
         while ((match = pattern.exec(text))) {
-            console.log(match);
             out.push(match);
         }
         return out;
