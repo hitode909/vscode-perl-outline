@@ -34,11 +34,12 @@ export class PerlDocumentSymbolProvider implements vscode.DocumentSymbolProvider
         return {
             package: vscode.SymbolKind.Class,
             sub: vscode.SymbolKind.Function,
+            subtest: vscode.SymbolKind.Function,
         };
     }
 
     private get pattern() {
-        return /\b(package|sub)\b +([^ ;\n]+)/g;
+        return /\b(package|sub|subtest)\b +([^ ;\n'"{]+|(['"].+['"])+)/g;
     }
 
     private matchAll(
