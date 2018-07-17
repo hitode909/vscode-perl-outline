@@ -4,8 +4,11 @@
     "description": "WIP: Provide outline view for Perl",
     "version": "0.0.1",
     "publisher": "hitode909",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/hitode909/vscode-perl-outline",
     "icon": "icon.png",
-    "homepage": "https://github.com/hitode909/perl-outline",
+    "homepage": "https://github.com/hitode909/vscode-perl-outline",
     "engines": {
         "vscode": "^1.25.0"
     },
