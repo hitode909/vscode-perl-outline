@@ -4,11 +4,13 @@
     "description": "WIP: Provide outline view for Perl",
     "version": "0.0.1",
     "publisher": "hitode909",
+    "icon": "icon.png",
+    "homepage": "https://github.com/hitode909/perl-outline",
     "engines": {
         "vscode": "^1.25.0"
     },
     "categories": [
-        "Other"
+        "Programming Languages"
     ],
     "activationEvents": [
         "onLanguage:perl"
