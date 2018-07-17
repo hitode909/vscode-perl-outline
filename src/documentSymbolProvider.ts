@@ -38,6 +38,7 @@ export class PerlDocumentSymbolProvider implements vscode.DocumentSymbolProvider
         };
     }
 
+    // TODO: replace with better regexp
     private get pattern() {
         return /\b(package|sub|subtest)\b +([^ ;\n'"{]+|(['"].+['"])+)/g;
     }
