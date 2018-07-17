@@ -6,7 +6,7 @@
     "publisher": "hitode909",
     "repository": {
         "type": "git",
-        "url": "https://github.com/hitode909/vscode-perl-outline",
+        "url": "https://github.com/hitode909/vscode-perl-outline"
     },
     "icon": "icon.png",
     "homepage": "https://github.com/hitode909/vscode-perl-outline",
