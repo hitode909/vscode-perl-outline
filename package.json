@@ -2,7 +2,7 @@
     "name": "perl-outline",
     "displayName": "perl-outline",
     "description": "WIP: Provide outline view for Perl",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "publisher": "hitode909",
     "repository": {
         "type": "git",
