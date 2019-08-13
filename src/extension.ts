@@ -6,7 +6,7 @@ export function activate(context: vscode.ExtensionContext) {
 	context.subscriptions.push(
 		vscode.languages.registerDocumentSymbolProvider(
 			[
-				{ language: 'perl', pattern: '**/*.{pm,pl,t}' },
+				{ language: 'perl', pattern: '**/*.{pm,pl,t,ph}' },
 				{ language: 'perl', scheme: 'untitled' },
 			],
 			new PerlDocumentSymbolProvider()
