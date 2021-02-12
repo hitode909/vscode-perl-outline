@@ -32,6 +32,21 @@ suite("Pattern Tests", function () {
         `), null);
     });
 
+    test("capture indent string for location adjusting", function() {
+        const matched = PATTERN.exec(dedent(`
+        print 1;
+
+          package Bar;
+        `));
+        assert(matched);
+        if (matched) {
+            assert.equal(matched[1], '\n  ');
+            assert.equal(matched[2], 'package');
+            assert.equal(matched[3], 'Bar');
+        }
+    });
+
+
     test("# sub is not a sub", function() {
         assert.deepEqual(match(`
         # sub like
