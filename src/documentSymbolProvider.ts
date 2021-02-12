@@ -1,7 +1,8 @@
 
 import * as vscode from 'vscode';
 
-export const PATTERN = /(^package|\bsub|\bsubtest)\b +([^ ;\n'"{]+|(['"].+['"])+)/gm;
+// see #8
+export const PATTERN = /^\s*(?<!#)(?:(package|sub|subtest)\s+(\w+|(".+?")|('.+?'))|(BEGIN|END|UNITCHECK|CHECK|INIT)\b)/gm;
 
 /* respect https://github.com/Gimly/vscode-fortran/blob/229cddce53a2ea0b93032619efeef26376cd0d2c/src/documentSymbolProvider.ts
            https://github.com/Microsoft/vscode/blob/34ba2e2fbfd196e2d6db5a4db0e42d03a97c655e/extensions/markdown-language-features/src/features/documentLinkProvider.ts
@@ -40,7 +41,6 @@ export class PerlDocumentSymbolProvider implements vscode.DocumentSymbolProvider
         };
     }
 
-    // TODO: replace with better regexp
     private get pattern() {
         return PATTERN;
     }
