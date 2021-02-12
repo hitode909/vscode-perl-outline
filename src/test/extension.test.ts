@@ -1,8 +1,9 @@
 import * as assert from 'assert';
+const dedent = require("dedent");
 
 import { PATTERN } from '../documentSymbolProvider';
 
-const match = (str: String) => str.match(PATTERN);
+const match = (str: String) => dedent(str).match(PATTERN);
 
 suite("Pattern Tests", function () {
 
