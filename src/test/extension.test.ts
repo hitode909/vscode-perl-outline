@@ -31,4 +31,10 @@ suite("Pattern Tests", function () {
         # package Foo;
         `), null);
     });
+
+    test("# sub is not a sub", function() {
+        assert.deepEqual(match(`
+        # sub like
+        `), null);
+    });
 });
