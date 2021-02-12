@@ -1,22 +1,27 @@
-//
-// Note: This example test is leveraging the Mocha test framework.
-// Please refer to their documentation on https://mochajs.org/ for help.
-//
-
-// The module 'assert' provides assertion methods from node
 import * as assert from 'assert';
 
-// You can import and use all API from the 'vscode' module
-// as well as import your extension to test it
-// import * as vscode from 'vscode';
-// import * as myExtension from '../extension';
+import { PATTERN } from '../documentSymbolProvider';
 
-// Defines a Mocha test suite to group tests of similar kind together
-suite("Extension Tests", function () {
+const match = (str: String) => str.match(PATTERN);
 
-    // Defines a Mocha unit test
-    test("Something 1", function() {
-        assert.equal(-1, [1, 2, 3].indexOf(5));
-        assert.equal(-1, [1, 2, 3].indexOf(0));
+suite("Pattern Tests", function () {
+
+    test("Not match", function() {
+        assert.deepEqual(match(`
+        print 1;
+        `), null);
+    });
+
+    test("sub", function() {
+        assert.deepEqual(match(`
+        sub foo {}
+        sub bar {}
+        `), ['sub foo', 'sub bar']);
+    });
+
+    test("package", function() {
+        assert.deepEqual(match(`
+        package Foo;
+        `), ['package Foo']);
     });
 });
