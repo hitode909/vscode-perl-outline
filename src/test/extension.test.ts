@@ -37,4 +37,12 @@ suite("Pattern Tests", function () {
         # sub like
         `), null);
     });
+
+    test("prototypes", function() {
+        assert.deepEqual(match(`
+        sub method1 ($arg1, $arg2)
+        sub method2($arg1, $arg2)
+        sub method3($arg1,$arg2)
+        `), ['sub method1 ($arg1, $arg2)', 'sub method2($arg1, $arg2)', 'sub method3($arg1,$arg2)']);
+    });
 });
