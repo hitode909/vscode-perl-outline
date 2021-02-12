@@ -25,4 +25,10 @@ suite("Pattern Tests", function () {
         package Foo;
         `), ['package Foo']);
     });
+
+    test("package must start from beginning of lines", function() {
+        assert.deepEqual(match(`
+        # package Foo;
+        `), null);
+    });
 });
