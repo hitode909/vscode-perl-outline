@@ -1,6 +1,11 @@
 
 import * as vscode from 'vscode';
 
+// [1]: whitespace for adjust location
+// [2]: type
+// [3]: name
+export const PATTERN = /^(\s*)(?<!#)(?:(package|sub|subtest)\s+(\w+|(".+?")|('.+?'))(\s*\([^\)]+\))?)/gm;
+
 /* respect https://github.com/Gimly/vscode-fortran/blob/229cddce53a2ea0b93032619efeef26376cd0d2c/src/documentSymbolProvider.ts
            https://github.com/Microsoft/vscode/blob/34ba2e2fbfd196e2d6db5a4db0e42d03a97c655e/extensions/markdown-language-features/src/features/documentLinkProvider.ts
  */
@@ -16,11 +21,12 @@ export class PerlDocumentSymbolProvider implements vscode.DocumentSymbolProvider
         const matchedList = this.matchAll(this.pattern, text);
 
         return matchedList.map((matched) => {
-            const type = matched[1];
-            const name = matched[2];
+            const whitespace = matched[1];
+            const type = matched[2];
+            const name = matched[3];
             const kind = tokenToKind[type];
 
-            const position = document.positionAt(matched.index || 0);
+            const position = document.positionAt((matched.index || 0) + whitespace.length);
             return new vscode.SymbolInformation(
                 name,
                 kind,
@@ -38,9 +44,8 @@ export class PerlDocumentSymbolProvider implements vscode.DocumentSymbolProvider
         };
     }
 
-    // TODO: replace with better regexp
     private get pattern() {
-        return /(^package|\bsub|\bsubtest)\b +([^ ;\n'"{]+|(['"].+['"])+)/gm;
+        return PATTERN;
     }
 
     private matchAll(

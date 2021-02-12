@@ -1,22 +1,63 @@
-//
-// Note: This example test is leveraging the Mocha test framework.
-// Please refer to their documentation on https://mochajs.org/ for help.
-//
-
-// The module 'assert' provides assertion methods from node
 import * as assert from 'assert';
+const dedent = require("dedent");
 
-// You can import and use all API from the 'vscode' module
-// as well as import your extension to test it
-// import * as vscode from 'vscode';
-// import * as myExtension from '../extension';
+import { PATTERN } from '../documentSymbolProvider';
 
-// Defines a Mocha test suite to group tests of similar kind together
-suite("Extension Tests", function () {
+const match = (str: String) => dedent(str).match(PATTERN);
 
-    // Defines a Mocha unit test
-    test("Something 1", function() {
-        assert.equal(-1, [1, 2, 3].indexOf(5));
-        assert.equal(-1, [1, 2, 3].indexOf(0));
+suite("Pattern Tests", function () {
+
+    test("Not match", function() {
+        assert.deepEqual(match(`
+        print 1;
+        `), null);
+    });
+
+    test("sub", function() {
+        assert.deepEqual(match(`
+        sub foo {}
+        sub bar {}
+        `), ['sub foo', 'sub bar']);
+    });
+
+    test("package", function() {
+        assert.deepEqual(match(`
+        package Foo;
+        `), ['package Foo']);
+    });
+
+    test("package must start from beginning of lines", function() {
+        assert.deepEqual(match(`
+        # package Foo;
+        `), null);
+    });
+
+    test("capture indent string for location adjusting", function() {
+        const matched = PATTERN.exec(dedent(`
+        print 1;
+
+          package Bar;
+        `));
+        assert(matched);
+        if (matched) {
+            assert.equal(matched[1], '\n  ');
+            assert.equal(matched[2], 'package');
+            assert.equal(matched[3], 'Bar');
+        }
+    });
+
+
+    test("# sub is not a sub", function() {
+        assert.deepEqual(match(`
+        # sub like
+        `), null);
+    });
+
+    test("prototypes", function() {
+        assert.deepEqual(match(`
+        sub method1 ($arg1, $arg2)
+        sub method2($arg1, $arg2)
+        sub method3($arg1,$arg2)
+        `), ['sub method1 ($arg1, $arg2)', 'sub method2($arg1, $arg2)', 'sub method3($arg1,$arg2)']);
     });
 });
