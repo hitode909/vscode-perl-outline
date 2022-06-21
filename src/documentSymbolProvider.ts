@@ -40,7 +40,7 @@ export class PerlDocumentSymbolProvider implements vscode.DocumentSymbolProvider
 
     // TODO: replace with better regexp
     private get pattern() {
-        return /(^package|\bsub|\bsubtest)\b +([^ ;\n'"{]+|(['"].+['"])+)/gm;
+        return /(^package|\bsub|\bsubtest)\b +([^ ;\r\n'"{]+|(['"].+['"])+)/gm;
     }
 
     private matchAll(
